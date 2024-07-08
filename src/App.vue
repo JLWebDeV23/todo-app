@@ -1,14 +1,18 @@
 <template>
-  <h1 class="text-center text-4xl relative z-10 mb-5 text-white text-shadow-3d">
-    Joe's Vue Todos
-  </h1>
-  <div class="font-sans mx-auto p-5 bg-teal-800 rounded max-w-md">
-    <AddTask @addTask="addTask" />
-    <TaskList
-      :tasks="tasks"
-      @remove-task="removeTask"
-      @update-task="updateTask"
-    />
+  <div class="flex-col">
+    <h1
+      class="text-center text-4xl relative z-10 mb-5 text-white text-shadow-3d"
+    >
+      Joe's Vue Todos
+    </h1>
+    <div class="font-sans mx-auto p-5 bg-teal-800 rounded max-w-md">
+      <AddTask @addTask="addTask" />
+      <TaskList
+        :tasks="tasks"
+        @remove-task="removeTask"
+        @update-task="updateTask"
+      />
+    </div>
   </div>
 </template>
 

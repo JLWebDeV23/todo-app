@@ -1,7 +1,8 @@
 import {
   DynamoDBClient,
-  //   GetItemCommand,
+  GetItemCommand,
   //   DescribeTableCommand,
+  QueryCommand,
   PutItemCommand,
   //   DeleteItemCommand,
 } from "@aws-sdk/client-dynamodb";
@@ -28,41 +29,35 @@ const client = new DynamoDBClient(config);
 // updateCommand
 // deleteCommand
 
-// const getItem = async () => {
-//   const params = {
-//     TableName: "Users",
-//     Key: {
-//       UserId: { S: "123" },
-//       List: { S: "sup" }, // replace "yourListValue" with the actual value
-//     },
-//   };
+const getItem = async () => {
+  const params = {
+    TableName: "Users",
+    Key: {
+      UserId: { S: "123" },
+      List: { S: "sup" }, // replace "yourListValue" with the actual value
+    },
+  };
 
-//   try {
-//     const data = await client.send(new GetItemCommand(params));
-//     console.log(data.Item);
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
+  try {
+    const data = await client.send(new GetItemCommand(params));
+    console.log(data.Item);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 // getItem();
 
 // now lets add an item to the table
 const putItem = async () => {
-  //   const params = {
-  //     TableName: "Users",
-  //     Item: {
-  //       UserId: { S: "123" },
-  //       List: { S: `sup${new Date()}` },
-  //       Name: { S: `${Math.random()}` },
-  //     },
-  //   };
   const params = {
     TableName: "Users",
     Item: {
-      UserId: { S: "joey" },
-      List: { S: `supPal` },
-      Name: { S: `TomisCool` },
+      PK: { S: "USERID#4" },
+      SK: { S: "LISTID#4#ITEMID#4" },
+      ItemId: { S: "2" },
+      ItemName: { S: "this is a test" },
+      Completed: { BOOL: false },
     },
   };
 
@@ -75,8 +70,8 @@ const putItem = async () => {
 };
 
 const main = async () => {
-  //for 10 times
   putItem();
+  // getItem();
 };
 
 main();
