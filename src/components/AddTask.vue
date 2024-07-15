@@ -26,9 +26,11 @@ const addTask = () => {
       Math.random() * (9999999999 - 100000000) + 100000000
     );
     const task = {
-      id: taskId,
-      name: newTaskInput.value,
-      completed: false,
+      PK: 0,
+      SK: 0,
+      ItemId: taskId,
+      ItemName: newTaskInput.value,
+      Completed: false,
     };
     emit("add-task", task);
     newTaskInput.value = "";
