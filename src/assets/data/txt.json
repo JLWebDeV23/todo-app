@@ -1,8 +1,0 @@
-Table(Users) => {
-    User[Id]: S, PK
-    List[Id]: S, SK => {
-        Item[Id]: S,
-        Item[Name]: S,
-        Complete: B
-    }
-}

@@ -3,15 +3,10 @@ import "./assets/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import PrimeVue from "primevue/config";
-import Button from "primevue/button";
-import InputText from "primevue/inputtext";
-import Password from "primevue/password";
 import router from "./router";
+import Aura from "@primevue/themes/aura";
 
 const app = createApp(App);
-app.use(PrimeVue);
-app.component("PrimeButton", Button);
-app.component("PrimeInputText", InputText);
-app.component("PrimePassword", Password);
-
-app.use(router).mount("#app");
+app.use(PrimeVue, { theme: Aura });
+app.use(router);
+app.mount("#app");
