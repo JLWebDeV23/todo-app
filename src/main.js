@@ -6,6 +6,7 @@ import PrimeVue from "primevue/config";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
+import router from "./router";
 
 const app = createApp(App);
 app.use(PrimeVue);
@@ -13,4 +14,4 @@ app.component("PrimeButton", Button);
 app.component("PrimeInputText", InputText);
 app.component("PrimePassword", Password);
 
-app.mount("#app");
+app.use(router).mount("#app");

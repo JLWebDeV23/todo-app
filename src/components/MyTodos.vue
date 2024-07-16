@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <h1
       class="text-center text-4xl relative z-10 mb-5 text-white text-shadow-3d"
