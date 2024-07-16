@@ -1,7 +1,9 @@
-@import './base.css';
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@import 'primeicons/primeicons.css';
+@import "primeflex/primeflex.css";
 
 
 #app {

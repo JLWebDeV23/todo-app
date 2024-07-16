@@ -1,9 +1,10 @@
 import {
   DynamoDBClient,
-  GetItemCommand,
+  // GetItemCommand,
+  // UpdateCommand,
   //   DescribeTableCommand,
-  QueryCommand,
-  PutItemCommand,
+  // QueryCommand,
+  // PutItemCommand,
   //   DeleteItemCommand,
 } from "@aws-sdk/client-dynamodb";
 // import { c } from "vite/dist/node/types.d-aGj9QkWt";
@@ -16,8 +17,6 @@ const config = {
   credentials: {
     accessKeyId: "AKIAU6GD3FPF2BIGIZMI",
     secretAccessKey: "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",
-    // accessKeyId: "ASIAU6GD3FPF2UW4FWO3",
-    // secretAccessKey: "Ehu0wgJ7bxHlLrTvq1YTc67+x4LjX2jslSNB0uaa",
   },
 };
 
@@ -29,22 +28,22 @@ const client = new DynamoDBClient(config);
 // updateCommand
 // deleteCommand
 
-const getItem = async () => {
-  const params = {
-    TableName: "Users",
-    Key: {
-      UserId: { S: "123" },
-      List: { S: "sup" }, // replace "yourListValue" with the actual value
-    },
-  };
+// const getItem = async () => {
+//   const params = {
+//     TableName: "Users",
+//     Key: {
+//       UserId: { S: "123" },
+//       List: { S: "sup" }, // replace "yourListValue" with the actual value
+//     },
+//   };
 
-  try {
-    const data = await client.send(new GetItemCommand(params));
-    console.log(data.Item);
-  } catch (err) {
-    console.error(err);
-  }
-};
+//   try {
+//     const data = await client.send(new GetItemCommand(params));
+//     console.log(data.Item);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 // getItem();
 
@@ -69,8 +68,16 @@ const putItem = async () => {
   }
 };
 
+const updateItem = async () => {
+  const params = {
+    TableName: "Users",
+    Key: {},
+  };
+};
+
 const main = async () => {
-  putItem();
+  // putItem();
+  updateItem();
   // getItem();
 };
 

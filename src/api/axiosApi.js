@@ -1,14 +1,20 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  "https://3ivr1uqx80.execute-api.ap-southeast-2.amazonaws.com/dev";
+const apiClient = axios.create({
+  baseURL:
+    "https://3n3otta4p3.execute-api.ap-southeast-2.amazonaws.com/default/",
+  headers: {
+    "Content-Type": "application/json",
+    "X-Api-Key": "Xn98TnxayS4eZHcN3CRBA5JIWcl1DoJk29Z6Qeqf",
+  },
+});
 
-export const fetchLists = async (userId, listId) => {
+export const fetchLists = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/items`, {
+    const response = await apiClient.get("getTaskList", {
       params: {
-        userId,
-        listId,
+        userId: "0",
+        listId: "0",
       },
     });
     return response.data;
@@ -19,48 +25,44 @@ export const fetchLists = async (userId, listId) => {
 };
 
 export const addTask = async (task) => {
-  const newTask = {
-    userId: task.userId,
-    listId: task.listId,
-    itemId: task.id,
-    itemName: task.name,
-    completed: task.completed,
-  };
-
   try {
-    const response = await axios.post(`${API_BASE_URL}/tasks`, newTask);
-    return response.data;
-  } catch (err) {
-    console.error(err);
-    throw err;
+    const response = await apiClient.put(`AddTodoFunction`, {
+      PK: task.PK,
+      SK: task.SK,
+      ItemId: JSON.stringify(task.ItemId),
+      ItemName: task.ItemName,
+      Completed: task.Completed,
+    });
+    console.log("Task added:", response.data.message);
+    return response.data.message; // Return the actual message from the response
+  } catch (error) {
+    console.error("Error adding task:", error);
+    throw error; // Rethrow the error to be handled or logged by the caller
   }
 };
 
 export const removeTask = async (task) => {
-  const newTask = {
-    userId: task.userId,
-    listId: task.listId,
-    itemId: task.id,
-  };
   try {
-    const response = await axios.post(`${API_BASE_URL}/removeTask`, newTask);
+    console.log(task);
+    const response = await apiClient.delete(`removeTask`, {
+      data: {
+        PK: task.PK,
+        SK: task.SK,
+      },
+    });
     return response.data;
   } catch (error) {
-    console.error("Error removing task:", error);
-    throw error;
+    console.log("Error removing task:", error);
+    throw error; // Rethrow the error for further handling
   }
 };
 
 export const updateTask = async (task) => {
-  const newTask = {
-    userId: task.userId,
-    listId: task.listId,
-    itemId: task.id,
-    completed: task.completed,
-  };
   try {
-    const response = await axios.post(`${API_BASE_URL}/updateTask`, {
-      newTask,
+    const response = await apiClient.post(`updateTask`, {
+      PK: task.PK,
+      SK: task.SK,
+      completed: task.Completed,
     });
     return response.data;
   } catch (error) {
@@ -68,18 +70,3 @@ export const updateTask = async (task) => {
     throw error;
   }
 };
-
-// addTask({
-//   userId: "joey",
-//   listId: "supPal",
-//   id: "123",
-//   name: "TomisCool",
-//   completed: false,
-// });
-const test = async () => {
-  const response = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
-  console.log(response.data);
-};
-test();
