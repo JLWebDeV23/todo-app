@@ -9,12 +9,12 @@ const apiClient = axios.create({
   },
 });
 
-export const fetchLists = async () => {
+export const fetchLists = async (user) => {
   try {
     const response = await apiClient.get("getTaskList", {
       params: {
-        userId: "0",
-        listId: "0",
+        user_id: `${user.username}`,
+        list_id_item_id: `LISTID#${user.list_id}`,
       },
     });
     return response.data;
