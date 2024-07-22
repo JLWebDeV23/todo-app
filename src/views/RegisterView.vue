@@ -6,15 +6,16 @@ import InputGroupAddon from "primevue/inputgroupaddon";
 import InputText from "primevue/inputtext";
 import FloatLabel from "primevue/floatlabel";
 import { userRegistration } from "@/api/axiosApi";
-import Button from 'primevue/button';
-
-
+import Button from "primevue/button";
+import router from "../router/index";
 
 const username = ref("");
 const password = ref("");
 const email = ref("");
-const isSubmitDisabled = computed(() => !username.value || !password.value || !email.value);
 
+const isSubmitDisabled = computed(
+  () => !username.value || !password.value || !email.value
+);
 
 const handleSubmit = async () => {
   console.log("Registering user...");
@@ -23,23 +24,22 @@ const handleSubmit = async () => {
   const data = {
     username: username.value,
     password: passwordHashed,
-    email: email.value
+    email: email.value,
   };
   try {
     const response = await userRegistration(data);
     console.log(response);
     alert("Registration successful!");
+    router.push("/");
   } catch (error) {
     console.error(error.message);
     alert("Registration failed!", error.message);
   }
-};  
+};
 </script>
 
 <template>
-  <div
-    class="register flex flex-col justify-center items-center space"
-  >
+  <div class="register flex flex-col justify-center items-center space">
     <h1 class="text-6xl green">Register</h1>
     <InputGroup>
       <InputGroupAddon>
@@ -71,11 +71,15 @@ const handleSubmit = async () => {
       </FloatLabel>
     </InputGroup>
 
-    <Button label="Submit" class="w-full green" :disabled="isSubmitDisabled" @click="handleSubmit">Submit</Button>
+    <Button
+      label="Submit"
+      class="w-full green"
+      :disabled="isSubmitDisabled"
+      @click="handleSubmit"
+      >Submit</Button
+    >
   </div>
 </template>
-
-
 
 <style scoped>
 .register {

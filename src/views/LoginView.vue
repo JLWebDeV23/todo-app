@@ -23,8 +23,11 @@ const handleLogin = async () => {
   };
   try {
     const response = await userLogin(data);
+    username.value = "";
+    password.value = "";
     console.log(response);
     alert("Login successful!");
+    
   } catch (error) {
     console.error(error.message);
     alert("Login failed!", error.message);
