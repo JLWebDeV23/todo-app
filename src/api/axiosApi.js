@@ -76,15 +76,18 @@ export const userRegistration = async (user) => {
     const response = await apiClient.put(
       `userRegistration`,
       {
-        PK: user.username, //Username
+        username: user.username, //Username
         password: user.password, //Password
       },
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
     // if (response.status === 201) {
     //   alert('Registration successful');
     //   this.$emit('auth-changed', true);
     // } frontend
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error registering the user:", error);
@@ -98,12 +101,12 @@ export const userLogin = async (user) => {
     const response = await apiClient.post(
       `userLogin`,
       {
-        params: {
-          PK: user.username, //username
-          password: user.password,
-        },
+        username: user.username,
+        password: user.password,
       },
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
 
     // if (response.status === 200) {

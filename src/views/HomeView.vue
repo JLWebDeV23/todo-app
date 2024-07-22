@@ -1,6 +1,5 @@
 <script setup>
-import LoginUser from '@/components/LoginUser.vue'
-// import Button from "primevue/button";
+import LoginUser from '@/views/LoginView.vue'
 </script>
 
 <template>

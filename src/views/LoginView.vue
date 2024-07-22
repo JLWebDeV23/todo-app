@@ -5,7 +5,7 @@ import InputText from "primevue/inputtext";
 import FloatLabel from "primevue/floatlabel";
 import Button from "primevue/button";
 import { ref, computed } from "vue";
-import { userRegistration, userLogin } from "../api/axiosApi";
+import { userLogin } from "../api/axiosApi";
 import Cookies from 'cookies';
 
 const username = ref("");
@@ -14,22 +14,6 @@ const isLoginDisabled = computed(() => !username.value || !password.value);
 
 const isAuthenticated = ref(false);
 const usernameState = ref("");
-
-const handleRegister = async () => {
-  console.log("Registering user...");
-  const data = {
-    username: username.value,
-    password: password.value
-  };
-  try {
-    const response = await userRegistration(data);
-    console.log(response);
-    alert("Registration successful!");
-  } catch (error) {
-    console.error(error.message);
-    alert("Registration failed!", error.message);
-  }
-};  
 
 const handleLogin = async () => {
   console.log("Logging in user...");
@@ -79,8 +63,8 @@ const handleLogout = () => {
 
     <div class="flex gap-2 h-11">
       <Button label="Login" class="w-full" :disabled="isLoginDisabled" @click="handleLogin"></Button>
-      <Button icon="pi pi-user-plus" @click="handleRegister"></Button>
-      
+      <Button icon="pi pi-user-plus" as="router-link" to="/Register" />
+ 
     </div>
     <Button class="absolute top-10 right-10" icon="pi pi-sign-out" @click="handleLogout" />
   </div>
